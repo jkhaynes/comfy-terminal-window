@@ -1,0 +1,25 @@
+{
+  "name": "Comfy",
+  "base": "dark",
+  "overrides": {
+    "claude": "#F4A6C0",
+    "text": "#FCE4EE",
+    "inactive": "#9C7A8E",
+    "subtle": "#6E5566",
+    "suggestion": "#F7B6CC",
+    "permission": "#F4A6C0",
+    "remember": "#B9A6F0",
+    "promptBorder": "#F4A6C0",
+    "planMode": "#B9A6F0",
+    "autoAccept": "#A8D8B9",
+    "bashBorder": "#F6D38B",
+    "success": "#A8D8B9",
+    "error": "#F2798F",
+    "warning": "#F6D38B",
+    "diffAdded": "#2F4A3A",
+    "diffRemoved": "#5A2C3C",
+    "diffAddedWord": "#4E7A5E",
+    "diffRemovedWord": "#8A3F57",
+    "userMessageBackground": "#363A4F"
+  }
+}

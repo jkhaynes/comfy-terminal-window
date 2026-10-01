@@ -1,22 +1,22 @@
-﻿# ✿ sakura status line for Claude Code ✿
+﻿# ✿ comfy status line for Claude Code ✿
 # Claude Code pipes session info in as JSON; we print one pink line back.
 $ErrorActionPreference = 'SilentlyContinue'
 [Console]::InputEncoding = [Text.Encoding]::UTF8
 [Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)
 
 function fg([string]$hex) { $h = $hex.TrimStart('#'); "`e[38;2;$([Convert]::ToInt32($h.Substring(0,2),16));$([Convert]::ToInt32($h.Substring(2,2),16));$([Convert]::ToInt32($h.Substring(4,2),16))m" }
-$reset = "`e[0m"; $rose = fg '#EC87A8'; $pink = fg '#F7B6CC'; $dim = fg '#9C7A8E'
-$text = fg '#F4DDE6'; $mint = fg '#A8D8B9'; $gold = fg '#F6D38B'; $red = fg '#F2798F'
+$reset = "`e[0m"; $rose = fg '#F4A6C0'; $pink = fg '#F7B6CC'; $dim = fg '#9C7A8E'
+$text = fg '#FCE4EE'; $mint = fg '#A8D8B9'; $gold = fg '#F6D38B'; $red = fg '#F2798F'
 $sep = " $dim·$reset "
 
 try { $j = [Console]::In.ReadToEnd() | ConvertFrom-Json } catch { $j = $null }
-if (-not $j) { [Console]::Out.Write("$rose✿$reset sakura"); exit 0 }
+if (-not $j) { [Console]::Out.Write("🪴 comfy"); exit 0 }
 
 $parts = [Collections.Generic.List[string]]::new()
 
 # model
 $model = if ($j.model.display_name) { $j.model.display_name } else { 'Claude' }
-$parts.Add("$rose✿$reset $text$model$reset")
+$parts.Add("🪴 $text$model$reset")
 
 # how full the chat is
 $pct = $null
@@ -42,17 +42,13 @@ if ($null -ne $j.context_window.used_percentage) {
 if ($null -ne $pct) {
     $pct = [math]::Min(100, [math]::Max(0, $pct))
     $filled = [int][math]::Round($pct / 10)
-    $color = if ($pct -lt 50) { $mint } elseif ($pct -lt 70) { $gold } else { $red }
+    # plenty of room 🌸, halfway 🍵, time to wrap up 🌙
+    $color, $mood = if ($pct -lt 50) { $mint, '🌸' } elseif ($pct -lt 70) { $gold, '🍵' } else { $red, '🌙' }
     $bar = ('▰' * $filled) + ('▱' * (10 - $filled))
-    $ctx = "$color$bar$reset $text$([int][math]::Round($pct))%$reset"
-    if ($pct -ge 70) { $ctx += " $pink(wrap up soon ✿)$reset" }
-    $parts.Add($ctx)
+    $parts.Add("$color$bar$reset $text$([int][math]::Round($pct))%$reset $mood")
 }
 
-# cost and time
-if ($null -ne $j.cost.total_cost_usd) {
-    $parts.Add("$text`$$('{0:N2}' -f [double]$j.cost.total_cost_usd)$reset")
-}
+# time
 if ($j.cost.total_duration_ms) {
     $mins = [math]::Floor([double]$j.cost.total_duration_ms / 60000)
     $dur = if ($mins -ge 60) { '{0}h {1}m' -f [math]::Floor($mins / 60), ($mins % 60) } else { "${mins}m" }
