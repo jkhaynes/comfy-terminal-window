@@ -1,0 +1,44 @@
+{
+  "$help": "https://aka.ms/terminal-documentation",
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "schemes": [
+    {
+      "name": "Sakura",
+      "background": "#2A1B2B",
+      "foreground": "#F4DDE6",
+      "cursorColor": "#F7B6CC",
+      "selectionBackground": "#5C3450",
+      "black": "#3B2638",
+      "red": "#F2798F",
+      "green": "#A8D8B9",
+      "yellow": "#F6D38B",
+      "blue": "#B9A6F0",
+      "purple": "#E39BD6",
+      "cyan": "#9ED9DF",
+      "white": "#F4DDE6",
+      "brightBlack": "#9C7A8E",
+      "brightRed": "#FF9DB0",
+      "brightGreen": "#C4EBD1",
+      "brightYellow": "#FBE3AE",
+      "brightBlue": "#D2C5F7",
+      "brightPurple": "#F2BDE6",
+      "brightCyan": "#C0EBEF",
+      "brightWhite": "#FFF5F9"
+    }
+  ],
+  "profiles": [
+    {
+      "name": "Sakura",
+      "commandline": "pwsh.exe -NoLogo",
+      "startingDirectory": "%USERPROFILE%",
+      "icon": "🌸",
+      "colorScheme": "Sakura",
+      "tabColor": "#EC87A8",
+      "font": { "face": "Cascadia Mono", "size": 12 },
+      "padding": "16",
+      "cursorShape": "bar",
+      "opacity": 94,
+      "useAcrylic": true
+    }
+  ]
+}
